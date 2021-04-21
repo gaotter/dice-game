@@ -1,0 +1,12 @@
+<div *ngIf="activeStep && activePlayer">
+  <h1>{{activePlayer.name}}</h1>
+  <div *ngIf="done"> is done</div>
+  <div *ngIf="activeStep.stepType == 'role'">
+    {{ activeStep.description}}
+  </div>
+  <div *ngIf="activeStep.stepType == 'bet'">
+    {{ activeStep.description}}
+  </div>
+  <button (click)="nextStep()">Next step</button>
+
+</div>
