@@ -11,7 +11,8 @@ describe('DiceRolerService', () => {
   });
 
   it('should be created', () => {
-    service.checkPoint();
-    expect(service).toBeTruthy();
+    var res = service.checkPoint([1,2,4,5,6]);
+    console.log(res);
+    expect(res).toBeGreaterThan(0);
   });
 });

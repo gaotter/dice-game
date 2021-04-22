@@ -1,12 +1,29 @@
+<div *ngIf="gameEngineService.playersObservable| async as players" class="playes-panel">
+    <div class="player" *ngFor="let player of players" >
+       Name:{{player.name}}
+       Hand:{{player.hand}}
+       Score:{{player.roundPoints}}
+    </div>
+</div>
+
 <div *ngIf="activeStep && activePlayer">
   <h1>{{activePlayer.name}}</h1>
   <div *ngIf="done"> is done</div>
-  <div *ngIf="activeStep.stepType == 'role'">
-    {{ activeStep.description}}
+
+  <div class="dices">
+    <div *ngFor="let dice of dices">
+      {{dice.value}}
+      {{dice.hold}}
+      <button (click)="onHold(dice)" *ngIf="activeStep.stepType == 'hold'">Hold</button>
+    </div>
   </div>
-  <div *ngIf="activeStep.stepType == 'bet'">
-    {{ activeStep.description}}
+
+  <div *ngIf="activeStep.stepType == 'role' || activeStep.stepType == 'hold'">
+    <button (click)="roleDice()">RoleDice</button>
   </div>
-  <button (click)="nextStep()">Next step</button>
+  <!-- <div *ngIf="activeStep.stepType == 'hold'">
+    {{ activeStep.description}}
+  </div> -->
+  <!-- <button *ngIf="activeStep.stepType == 'hold'" (click)="nextStep()">Next step</button> -->
 
 </div>

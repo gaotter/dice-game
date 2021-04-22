@@ -25,18 +25,26 @@ export class GameEngineService {
       totalPoints: 0,
       steps:[]
     },
+    {
+      name:"Linda",
+      roundPoints: 0,
+      totalPoints: 0,
+      steps:[]
+    }
   ];
   steps: Step[] = [];
-  dices: Dice[] = [];
   rounds:number = 3;
   round:number = 0;
 
   roundSubs:Subscription[] = [];
 
+  private playersSubject:BehaviorSubject<Player[]> = new BehaviorSubject<Player[]>(this.players);
+
   private activePlayerSubject: BehaviorSubject<Player> = new BehaviorSubject<Player>(
     null
   );
   public activePlayerObsevable: Observable<Player> = this.activePlayerSubject.pipe(filter(p => p != null));
+  public playersObservable: Observable<Player[]> = this.playersSubject.asObservable();
   private playerDoneAction: Subject<Player> = new Subject<Player>();
   private roundDoneActions: Subject<void> = new Subject<void>();
 
@@ -60,6 +68,7 @@ export class GameEngineService {
 
   startRound() {
     // init
+    this.players.forEach(p => p.hasRoled = false);
     this.roundSubs.forEach(s => {
       if(!s.closed) {
         s.unsubscribe();
@@ -98,27 +107,18 @@ export class GameEngineService {
       stepType: 'role',
     });
     this.steps.push({
-      description: 'Trow dice 2',
-      stepType: 'role',
+      description: 'Hold',
+      stepType: 'hold',
     });
     this.steps.push({
-      description: 'Trow dice 3',
-      stepType: 'role',
+      description: 'Hold',
+      stepType: 'hold',
     });
 
-    this.steps.push({
-      description: 'Bet',
-      stepType: 'bet',
-    });
+
   }
 
-  roleDices(dices: Dice[]): Dice[] {
-    var dicesToThrow = dices.filter((d) => !d.hold);
 
-    dicesToThrow.forEach((d) => (d.value = Math.random() * 6 + 1));
-
-    return dicesToThrow;
-  }
 }
 
 export class Player {
@@ -128,6 +128,7 @@ export class Player {
   id?: number;
   hasRoled?: boolean;
   steps:Step[];
+  hand?:string;
 }
 
 export class Step {
@@ -136,10 +137,7 @@ export class Step {
   isDone?: boolean;
 }
 
-export interface Dice {
-  hold: boolean;
-  value: number;
-}
+
 
 export interface GameModel {
   players: Player[];

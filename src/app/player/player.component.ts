@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameEngineService, Player, Step } from './../game-engine.service';
+import {Dice, DiceRolerService} from './../dice-roler.service';
 
 @Component({
   selector: 'app-player',
@@ -13,7 +14,31 @@ export class PlayerComponent implements OnInit {
   activeStep:Step;
   done:boolean;
 
-  constructor(private gameEngineService:GameEngineService) { }
+
+  dices:Dice[] = [
+    {
+      hold:false,
+      value:1
+    },
+    {
+      hold:false,
+      value:1
+    },
+    {
+      hold:false,
+      value:1
+    },
+    {
+      hold:false,
+      value:1
+    },
+    {
+      hold:false,
+      value:1
+    }
+  ]
+
+  constructor(public gameEngineService:GameEngineService, private diceRoler:DiceRolerService) { }
 
   ngOnInit(): void {
     this.gameEngineService.activePlayerObsevable.subscribe(p => {
@@ -26,18 +51,34 @@ export class PlayerComponent implements OnInit {
 
   nextStep()
   {
-    if(this.activeStepIndex <this.activePlayer.steps.length)
+    if(this.activeStepIndex < this.activePlayer.steps.length)
     {
       this.activeStep = this.activePlayer.steps[this.activeStepIndex];
       this.activeStepIndex = this.activeStepIndex + 1;
     } else {
       this.done = true;
+      this.dices.forEach(d => {
+        d.value = 1
+        d.hold = false});
       this.setDone();
     }
   }
 
   setDone(): void {
       this.gameEngineService.onPlayerIsDone(this.activePlayer);
+  }
+
+  onHold(dice:Dice) {
+    dice.hold = !dice.hold;
+  }
+
+  roleDice():void{
+    this.diceRoler.roleDices(this.dices);
+    var res = this.diceRoler.checkPoint(this.dices.map(d => d.value));
+    this.activePlayer.hand = res.name;
+    this.activePlayer.roundPoints = res.points;
+    this.nextStep();
+
   }
 
 }

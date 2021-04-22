@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DiceRolerService {
 
-  tempRule = [
+  rules = [
     {
       point:100,
       pattern:['x','x'],
@@ -48,23 +48,31 @@ export class DiceRolerService {
     }
   ]
 
-  dices=[2,3,4,5,1];
+
   constructor() { }
 
-   checkPoint():void
+  roleDices(dices: Dice[]): Dice[] {
+    var dicesToThrow = dices.filter((d) => !d.hold);
+
+    dicesToThrow.forEach((d) => (d.value = Math.floor(Math.random() * 6 + 1)));
+
+    return dicesToThrow;
+  }
+
+   checkPoint(dicesValues:number[])
    {
-      this.dices.sort();
+      dicesValues.sort();
 
       var sum = 0;
       var totalSum = 0;
       var name = '';
-       this.dices.forEach(d => {sum = sum + d});
+       dicesValues.forEach(d => {sum = sum + d});
 
-       var last = this.dices[0];
+       var last = dicesValues[0];
        var count = 0;
        var currnetPattern = [];
        var sameCount = [];
-       this.dices.forEach(d => {
+       dicesValues.forEach(d => {
             var same = last == 0 || last == d;
 
             last = d;
@@ -79,7 +87,7 @@ export class DiceRolerService {
 
        sameCount.push(count);
 
-       this.tempRule.forEach(r => {
+       this.rules.forEach(r => {
 
            const sameX = r.pattern.filter(s => s == 'x');
            const samez = r.pattern.filter(s => s == 'z');
@@ -136,8 +144,15 @@ export class DiceRolerService {
            }
        });
 
-       console.log(currnetPattern,sameCount, totalSum, name);
+       console.log(currnetPattern,sameCount, totalSum, name, sum, totalSum <= 0 ? sum : totalSum );
+
+       return {points:(totalSum <= 0 ? sum : totalSum), name:name};
 
    }
 
+}
+
+export interface Dice {
+  hold: boolean;
+  value: number;
 }
