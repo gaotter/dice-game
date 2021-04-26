@@ -68,8 +68,12 @@ export class PlayerComponent implements OnInit {
       this.gameEngineService.onPlayerIsDone(this.activePlayer);
   }
 
-  onHold(dice:Dice) {
-    dice.hold = !dice.hold;
+  onHold(dice:Dice, stepType:string) {
+
+    if(stepType === 'hold')
+    {
+      dice.hold = !dice.hold;
+    }
   }
 
   roleDice():void{

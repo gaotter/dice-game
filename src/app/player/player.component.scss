@@ -9,5 +9,39 @@
   display:flex;
   .dice {
     padding:3px;
+    height: 60px;
+    width: 60px;
+
+    background-size: 60px 60px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &.hold {
+      border: 1px solid black;
+    }
+
+    &.num-1 {
+      background-image: url("./../../assets/images/one-dice.png");
+    }
+
+    &.num-2 {
+      background-image: url("./../../assets/images/two-dice.png");
+    }
+
+    &.num-3 {
+      background-image: url("./../../assets/images/three-dice.png");
+    }
+
+    &.num-4 {
+      background-image: url("./../../assets/images/fore-dice.png");
+    }
+
+    &.num-5 {
+      background-image: url("./../../assets/images/five-dice.png");
+    }
+
+    &.num-6 {
+      background-image: url("./../../assets/images/six-dice.png");
+    }
   }
 }

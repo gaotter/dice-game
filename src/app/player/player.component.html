@@ -9,18 +9,20 @@
 <div *ngIf="activeStep && activePlayer">
   <h1>{{activePlayer.name}}</h1>
   <div *ngIf="done"> is done</div>
-
+  <h2 *ngIf="activeStep.stepType == 'hold'">Click on a dice to hold</h2>
   <div class="dices">
-    <div *ngFor="let dice of dices">
-      {{dice.value}}
-      {{dice.hold}}
-      <button (click)="onHold(dice)" *ngIf="activeStep.stepType == 'hold'">Hold</button>
+
+    <div (click)="onHold(dice, activeStep.stepType)" *ngFor="let dice of dices">
+      <div [class]="'dice num-' + dice.value" [ngClass]="{'hold': dice.hold}"></div>
+
     </div>
   </div>
 
   <div *ngIf="activeStep.stepType == 'role' || activeStep.stepType == 'hold'">
     <button (click)="roleDice()">RoleDice</button>
   </div>
+
+  <div *ngIf="activeStep.stepType == 'look'"><button (click)="nextStep()">Done</button></div>
   <!-- <div *ngIf="activeStep.stepType == 'hold'">
     {{ activeStep.description}}
   </div> -->

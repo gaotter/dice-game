@@ -114,6 +114,10 @@ export class GameEngineService {
       description: 'Hold',
       stepType: 'hold',
     });
+    this.steps.push({
+      description: 'Look',
+      stepType: 'look',
+    });
 
 
   }
@@ -133,7 +137,7 @@ export class Player {
 
 export class Step {
   description: string;
-  stepType: 'role' | 'bet' | 'start' | 'hold';
+  stepType: 'role' | 'bet' | 'start' | 'hold' | 'look';
   isDone?: boolean;
 }
 
