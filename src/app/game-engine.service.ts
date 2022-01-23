@@ -85,7 +85,7 @@ export class GameEngineService {
 
     const playerSub = this.playerDoneAction.subscribe((player) => {
       const nextPlayer = this.players.find((p) => !p.hasRoled);
-      if (nextPlayer !== null) {
+      if (!!nextPlayer) {
         nextPlayer.steps = this.steps;
         this.activePlayerSubject.next(nextPlayer);
       } else {

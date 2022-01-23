@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
+import {IRules} from './Models/IRules';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiceRolerService {
 
-  rules = [
+  rules:IRules[] = [
     {
       point:100,
       pattern:['x','x'],
@@ -50,6 +51,8 @@ export class DiceRolerService {
 
 
   constructor() { }
+
+
 
   roleDices(dices: Dice[]): Dice[] {
     var dicesToThrow = dices.filter((d) => !d.hold);
