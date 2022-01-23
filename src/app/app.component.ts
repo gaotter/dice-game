@@ -9,9 +9,7 @@ import {GameEngineService} from './game-engine.service';
 export class AppComponent {
   title = 'dicegame';
 
-  constructor(private gameEngineService:GameEngineService) {}
+  constructor() {}
 
-  startRound():void {
-    this.gameEngineService.startRound();
-  }
+
 }

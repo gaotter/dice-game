@@ -1,6 +1,9 @@
-<app-player></app-player>
-
-<button (click)="startRound()">Start round</button>
 
 
-<app-uploadrule></app-uploadrule>
+<nav>
+  <a routerLink="/board">Game board</a>
+  <a routerLink="/uploadrules">Upload rules</a>
+</nav>
+<section>
+  <router-outlet></router-outlet>
+</section>
