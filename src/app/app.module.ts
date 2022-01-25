@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
-import { UploadruleComponent } from './uploadrule/uploadrule.component';
+import { SettingsComponent } from './settings/settings.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GameBoardComponent } from './game-board/game-board.component';
 
@@ -11,7 +11,7 @@ import { GameBoardComponent } from './game-board/game-board.component';
   declarations: [
     AppComponent,
     PlayerComponent,
-    UploadruleComponent,
+    SettingsComponent,
     GameBoardComponent
   ],
   imports: [

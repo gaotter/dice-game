@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UploadruleComponent } from './uploadrule/uploadrule.component';
+import { SettingsComponent} from './settings/settings.component';
 import { GameBoardComponent } from './game-board/game-board.component';
 import { CommonModule } from '@angular/common';
 
 const routes:Routes = [
-      {path:'uploadrules', component:UploadruleComponent},
+      {path:'settings', component:SettingsComponent},
       {path:'board', component:GameBoardComponent},
       { path: '', redirectTo: '/board', pathMatch: 'full' }
 ]

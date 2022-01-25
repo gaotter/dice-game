@@ -50,10 +50,7 @@ export class GameEngineService {
 
   constructor() {
     this.setUpSteps();
-    this.players.forEach((e, i) => {
-      e.id = i;
-      e.steps = this.steps;
-    });
+    this.setPlayerSteps();
 
 
 
@@ -64,6 +61,15 @@ export class GameEngineService {
        }
 
     });
+  }
+
+  setPlayerSteps() {
+    this.players.forEach((e, i) => {
+      e.id = i;
+      e.steps = this.steps;
+    });
+
+    this.playersSubject.next(this.players);
   }
 
   startRound() {

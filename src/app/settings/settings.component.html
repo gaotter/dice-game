@@ -1,0 +1,14 @@
+<section>
+  <h2>Game rules</h2>
+  <textarea #newrules>{{ rules }}</textarea>
+  <div class="btn-panel">
+    <button (click)="upload(newrules)"> upload</button>
+  </div>
+</section>
+<section>
+  <h2>Players</h2>
+  <textarea #newplayers>{{ players }}</textarea>
+  <div class="btn-panel">
+    <button (click)="uploadPlayer(newplayers)"> upload</button>
+  </div>
+</section>

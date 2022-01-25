@@ -3,7 +3,7 @@ import { GameEngineService, Player, Step } from './../game-engine.service';
 import {Dice, DiceRolerService} from './../dice-roler.service';
 
 @Component({
-  selector: 'app-player',
+  selector: 'mgmo-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
